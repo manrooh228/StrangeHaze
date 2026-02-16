@@ -546,13 +546,13 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 300
+      - m_Value: 150
         m_Name: FogAmount
         m_Overridden: 1
-      - m_Value: 8
+      - m_Value: 10
         m_Name: FogSizeMin
         m_Overridden: 1
-      - m_Value: 14
+      - m_Value: 15
         m_Name: FogSizeMax
         m_Overridden: 1
     m_Vector2f:
