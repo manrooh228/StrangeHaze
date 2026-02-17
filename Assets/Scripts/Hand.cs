@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Hand : MonoBehaviour
 {
     [SerializeField] private GameObject _weapon;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _playerTransform;
+    [SerializeField] private float _deadzoneRadius = 0.5f;
 
     private void Awake()
     {
@@ -13,21 +15,28 @@ public class Hand : MonoBehaviour
 
     private void Update()
     {
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        Vector3 difference = mousePos - transform.position;
+
+        if (difference.magnitude < _deadzoneRadius) return;
+
         float rotateZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
         FlipPlayer(difference.x);
 
-        if (_playerTransform.localScale.x < 0)
+        transform.rotation = Quaternion.Euler(0f, 0f, rotateZ);
+
+        Vector3 localScale = transform.localScale;
+        if (difference.x < 0)
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            //transform.rotation = Quaternion.Euler(180f, 0f, rotateZ);
+            transform.Rotate(180, 180, 0);
         }
         else
         {
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            //transform.rotation = Quaternion.Euler(0f, 0f, rotateZ);
+            transform.Rotate(0, 0, 0);
         }
+        transform.localScale = localScale;
     }
 
     private void FlipPlayer(float horizontalDirection)
@@ -46,5 +55,11 @@ public class Hand : MonoBehaviour
         }
 
         _playerTransform.localScale = scaler;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _deadzoneRadius);
     }
 }

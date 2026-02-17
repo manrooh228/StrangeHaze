@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Weapon : MonoBehaviour
 {
@@ -25,7 +26,17 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(_bullet, _spawnPoint.position, _spawnPoint.rotation);
+            // 1. Считаем направление от ствола к мышке в мировых координатах
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0; // Нам не нужна глубина в 2D
+
+            Vector2 direction = (mousePos - _spawnPoint.position).normalized;
+
+            // 2. Вычисляем угол для самой пули
+            float bulletAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            // 3. Создаем пулю и СРАЗУ задаем ей этот правильный угол
+            Instantiate(_bullet, _spawnPoint.position, Quaternion.Euler(0, 0, bulletAngle));
         }
     }
 
