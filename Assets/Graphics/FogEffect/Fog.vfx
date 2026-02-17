@@ -20,7 +20,7 @@ MonoBehaviour:
     x: 709
     y: -190
     width: 658
-    height: 1961
+    height: 2009
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1605,7 +1605,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -2007,7 +2007,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614645}
   - {fileID: 8926484042661614649}
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614644}
   m_MasterData:
@@ -2016,7 +2016,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Sphere, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"center":{"x":2.330155849456787,"y":1.3784022331237794,"z":0.0},"radius":1.0}'
+      m_SerializableObject: '{"center":{"x":2.330155849456787,"y":1.3784022331237794,"z":0.0},"radius":0.699999988079071}'
     m_Space: 0
   m_Property:
     name: Sphere
@@ -3814,7 +3814,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.OrientedBox, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"center":{"x":3.8310813903808595,"y":0.4878959655761719,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"size":{"x":58.92579650878906,"y":33.177459716796878,"z":1.0}}'
+      m_SerializableObject: '{"center":{"x":3.8310813903808595,"y":0.4878959655761719,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"size":{"x":59.900001525878909,"y":33.177459716796878,"z":1.0}}'
     m_Space: 0
   m_Property:
     name: Box
