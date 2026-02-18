@@ -31,10 +31,16 @@ public class Weapon : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, 0f, rotateZ);
 
+        Vector3 localScale = transform.localScale;
         if (directionToMouse.x < 0)
         {
-            transform.localRotation = Quaternion.Euler(180, 180, -rotateZ);
+            transform.Rotate(180, 180, 0);
         }
+        else
+        {
+            transform.Rotate(0, 0, 0);
+        }
+        transform.localScale = localScale;
 
         FireInput();
     }
@@ -57,9 +63,9 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    //private void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(_playerTransform.position, _deadzoneRadius);
-    //}
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_playerTransform.position, _deadzoneRadius);
+    }
 }

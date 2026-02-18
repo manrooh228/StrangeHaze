@@ -104,6 +104,7 @@ MonoBehaviour:
   _bullet: {fileID: 6637848278189866674, guid: d2d5dee9cbd6cc6448496548ed801fd0, type: 3}
   _spawnPoint: {fileID: 6037937780323960681}
   _playerTransform: {fileID: 0}
+  _deadzoneRadius: 4
 --- !u!1 &8753041048645814298
 GameObject:
   m_ObjectHideFlags: 0
