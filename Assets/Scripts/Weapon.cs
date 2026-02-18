@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject _bullet;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _playerTransform;
+    [SerializeField] private float _deadzoneRadius = 3f;
 
     private void Awake()
     {
@@ -14,30 +15,51 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        //float rotateZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(0f, 0f, rotateZ);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
 
-        
+        float distanceToPlayer = Vector3.Distance(_playerTransform.position, mousePos);
+
+        if (distanceToPlayer < _deadzoneRadius)
+        {
+            FireInput();
+            return;
+        }
+
+        Vector3 directionToMouse = mousePos - transform.position;
+        float rotateZ = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0f, 0f, rotateZ);
+
+        if (directionToMouse.x < 0)
+        {
+            transform.localRotation = Quaternion.Euler(180, 180, -rotateZ);
+        }
+
         FireInput();
     }
 
     private void FireInput()
     {
-        if (Input.GetMouseButtonDown(0))
+
+        bool _canShoot = GetComponentInParent<Hand>().getCanShoot();
+
+        if (Input.GetMouseButtonDown(0) && _canShoot)
         {
-            // 1. Считаем направление от ствола к мышке в мировых координатах
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0; // Нам не нужна глубина в 2D
+            mousePos.z = 0;
 
             Vector2 direction = (mousePos - _spawnPoint.position).normalized;
 
-            // 2. Вычисляем угол для самой пули
             float bulletAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            // 3. Создаем пулю и СРАЗУ задаем ей этот правильный угол
             Instantiate(_bullet, _spawnPoint.position, Quaternion.Euler(0, 0, bulletAngle));
         }
     }
 
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(_playerTransform.position, _deadzoneRadius);
+    //}
 }

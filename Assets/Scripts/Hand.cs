@@ -6,20 +6,32 @@ public class Hand : MonoBehaviour
     [SerializeField] private GameObject _weapon;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _playerTransform;
-    [SerializeField] private float _deadzoneRadius = 0.5f;
+    [SerializeField] private float _deadzoneRadius = 3f;
+    [SerializeField] private bool _canShoot;
+
+    public bool getCanShoot() => _canShoot;
 
     private void Awake()
     {
         Instantiate(_weapon, _spawnPoint);
     }
 
+   
     private void Update()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         Vector3 difference = mousePos - transform.position;
 
-        if (difference.magnitude < _deadzoneRadius) return;
+        if (difference.magnitude < _deadzoneRadius)
+        {
+            _canShoot = false;
+            return;
+        }
+        else
+        {
+            _canShoot = true;
+        }
 
         float rotateZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
@@ -60,6 +72,6 @@ public class Hand : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _deadzoneRadius);
+        Gizmos.DrawWireSphere(_playerTransform.position, _deadzoneRadius);
     }
 }
