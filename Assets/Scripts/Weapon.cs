@@ -7,6 +7,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private float _deadzoneRadius = 3f;
+    [SerializeField] private int _damage;
+
+    public int Damage { get => _damage; set => _damage = value; }
 
     private void Awake()
     {
