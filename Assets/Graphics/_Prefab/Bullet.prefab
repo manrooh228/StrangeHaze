@@ -139,3 +139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _timeToDestroy: 1
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128

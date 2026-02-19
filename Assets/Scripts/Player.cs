@@ -7,8 +7,11 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
     public VisualEffect vfxRenderer;
 
-    [Header("Movement Details")]
+    [Header("Physics")]
     [SerializeField] private float moveSpeed;
+    [SerializeField] private int health = 5;
+
+    public int Health { get => health; set => health = value; }
 
     private void Awake()
     {
@@ -30,5 +33,14 @@ public class Player : MonoBehaviour
         vfxRenderer.SetVector3("ColliderPos", transform.position);
     }
 
-   
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0) Die();
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
 }

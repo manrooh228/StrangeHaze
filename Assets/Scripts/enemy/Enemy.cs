@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,6 +19,11 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private bool _canSeePlayer;
 
+    [Header("Attack Settings")]
+    [SerializeField] private float _attackRange = 1.5f;
+    [SerializeField] private int _attackDamage = 1;
+    [SerializeField] private float _attackCooldown = 1f;
+    private float _lastAttackTime;
 
     protected virtual void Start()
     {
@@ -42,6 +48,47 @@ public class Enemy : MonoBehaviour
         if (_canSeePlayer)
         {
             MoveToPlayer();
+        }
+
+        DistanceCheckerAttackPlayer();
+    }
+
+    private void DistanceCheckerAttackPlayer()
+    {
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        if (_canSeePlayer)
+        {
+            if (distanceToPlayer <= _attackRange)
+            {
+                Attack(); // Если близко - атакуем
+            }
+            else
+            {
+                MoveToPlayer(); // Если далеко - догоняем
+            }
+        }
+    }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.TryGetComponent(out Bullet bullet))
+    //    {
+    //        int damage = FindFirstObjectByType<Weapon>().Damage;
+    //        TakeDamage(damage);
+    //        Destroy(bullet.gameObject);
+    //    }
+    //}
+
+    private void Attack()
+    {
+        if (Time.time >= _lastAttackTime + _attackCooldown)
+        {
+            if (player != null)
+            {
+                player.GetComponent<Player>().TakeDamage(_attackDamage);
+                _lastAttackTime = Time.time;
+            }
         }
     }
 
@@ -101,6 +148,9 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + viewAngleA * viewRadius);
         Gizmos.DrawLine(transform.position, transform.position + viewAngleB * viewRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _attackRange);
 
         if (_canSeePlayer)
         {

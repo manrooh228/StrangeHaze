@@ -105,6 +105,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 6037937780323960681}
   _playerTransform: {fileID: 0}
   _deadzoneRadius: 4
+  _damage: 1
 --- !u!1 &8753041048645814298
 GameObject:
   m_ObjectHideFlags: 0
