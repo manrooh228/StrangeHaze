@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private Animator anim;
+
     [Header("Physics")]
     [SerializeField] protected float speed;
     [SerializeField] protected int health;
     protected Transform player;
+    [SerializeField] private bool onoffGismos = true;
 
 
     [Header("FOV Settings")]
@@ -24,6 +27,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _attackDamage = 1;
     [SerializeField] private float _attackCooldown = 1f;
     private float _lastAttackTime;
+
+    private void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
 
     protected virtual void Start()
     {
@@ -48,6 +56,9 @@ public class Enemy : MonoBehaviour
         if (_canSeePlayer)
         {
             MoveToPlayer();
+        } else
+        {
+            anim.SetBool("isMoving", false);
         }
 
         DistanceCheckerAttackPlayer();
@@ -61,6 +72,8 @@ public class Enemy : MonoBehaviour
         {
             if (distanceToPlayer <= _attackRange)
             {
+                anim.SetBool("isMoving", false);
+                anim.SetTrigger("Attack");
                 Attack(); // Если близко - атакуем
             }
             else
@@ -88,6 +101,7 @@ public class Enemy : MonoBehaviour
             {
                 player.GetComponent<Player>().TakeDamage(_attackDamage);
                 _lastAttackTime = Time.time;
+                
             }
         }
     }
@@ -99,7 +113,10 @@ public class Enemy : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
+        anim.SetBool("isMoving", true);
         transform.Translate(Vector2.right * speed * Time.deltaTime);
+
+        
     }
 
     public virtual void TakeDamage(int damage)
@@ -137,26 +154,30 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Рисуем радиус
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, viewRadius);
-
-        // Рисуем линии угла обзора
-        Vector3 viewAngleA = DirectionFromAngle(-viewAngle / 2);
-        Vector3 viewAngleB = DirectionFromAngle(viewAngle / 2);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + viewAngleA * viewRadius);
-        Gizmos.DrawLine(transform.position, transform.position + viewAngleB * viewRadius);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _attackRange);
-
-        if (_canSeePlayer)
+        if (onoffGismos)
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, player.position);
+            // Рисуем радиус
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireSphere(transform.position, viewRadius);
+
+            // Рисуем линии угла обзора
+            Vector3 viewAngleA = DirectionFromAngle(-viewAngle / 2);
+            Vector3 viewAngleB = DirectionFromAngle(viewAngle / 2);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(transform.position, transform.position + viewAngleA * viewRadius);
+            Gizmos.DrawLine(transform.position, transform.position + viewAngleB * viewRadius);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _attackRange);
+
+            if (_canSeePlayer)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(transform.position, player.position);
+            }
         }
+        
     }
 
     private Vector3 DirectionFromAngle(float angleInDegrees)
