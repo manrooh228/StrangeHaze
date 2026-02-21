@@ -3,7 +3,7 @@ using UnityEngine;
 public class RevolverController : MonoBehaviour
 {
     public RevolverSlot[] slots; // Твои 6 UI-слотов
-    private int _currentSlotIndex = 0;
+    //private int _currentSlotIndex = 0;
 
     public bool RequestShot()
     {

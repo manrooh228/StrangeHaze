@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Player player;
     private Transform _playerTransform;
-    [SerializeField] private float _deadzoneRadius = 3f;
     [SerializeField] private int _damage;
 
     public int Damage { get => _damage; set => _damage = value; }
@@ -54,10 +53,10 @@ public class Weapon : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if(_playerTransform != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(_playerTransform.position, _deadzoneRadius);
-        }
+        //if(_playerTransform != null)
+        //{
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(_playerTransform.position, _deadzoneRadius);
+        //}
     }
 }
