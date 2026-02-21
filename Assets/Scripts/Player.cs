@@ -16,7 +16,14 @@ public class Player : MonoBehaviour
     [Header("Physics")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private int health = 5;
-    
+
+    [Header("SFX Settings")]
+    public AudioSource audioSource;
+    public AudioClip[] stepSounds;
+    public float stepInterval = 0.5f;
+    [Range(0.1f, 0.5f)] public float pitchRange = 0.2f;
+
+    private float stepTimer;
 
     [Header("Weapon")]
     [SerializeField] private bool haveWeapon = true;
@@ -111,6 +118,32 @@ public class Player : MonoBehaviour
         rb.linearVelocity = moveInput.normalized * moveSpeed;
 
         vfxRenderer.SetVector3("ColliderPos", transform.position);
+
+        // Ћогика звуков шагов
+        if (moveInput.sqrMagnitude > 0.1f)
+        {
+            stepTimer -= Time.deltaTime;
+            if (stepTimer <= 0)
+            {
+                PlayStepSound();
+                stepTimer = stepInterval;
+            }
+        }
+        else
+        {
+            stepTimer = 0; // —брасываем таймер при остановке
+        }
+    }
+
+    private void PlayStepSound()
+    {
+        if (stepSounds.Length == 0 || audioSource == null) return;
+
+        AudioClip clip = stepSounds[Random.Range(0, stepSounds.Length)];
+
+        audioSource.pitch = 1.0f + Random.Range(-pitchRange, pitchRange);
+
+        audioSource.PlayOneShot(clip);
     }
 
     public void TakeDamage(int damage)
