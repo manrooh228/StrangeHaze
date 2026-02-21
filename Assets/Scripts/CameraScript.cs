@@ -7,7 +7,6 @@ public class CameraScript : MonoBehaviour
     {
         if (player == null)
         {
-            Debug.LogWarning("Player Transform is not assigned to the CameraFollow script.");
             return;
         }
 

@@ -174,7 +174,8 @@ public class Enemy : MonoBehaviour
             if (_canSeePlayer)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(transform.position, player.position);
+                if(player)
+                    Gizmos.DrawLine(transform.position, player.position);
             }
         }
         

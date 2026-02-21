@@ -20,7 +20,7 @@ MonoBehaviour:
     x: 709
     y: -190
     width: 658
-    height: 1961
+    height: 2009
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2016,7 +2016,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Sphere, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"center":{"x":2.330155849456787,"y":1.3784022331237794,"z":0.0},"radius":1.0}'
+      m_SerializableObject: '{"center":{"x":2.330155849456787,"y":1.3784022331237794,"z":0.0},"radius":9.503494262695313}'
     m_Space: 0
   m_Property:
     name: Sphere
@@ -2218,7 +2218,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 100
+      m_SerializableObject: 50
     m_Space: -1
   m_Property:
     name: attractionSpeed
@@ -2252,7 +2252,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.01
+      m_SerializableObject: 0.005
     m_Space: -1
   m_Property:
     name: attractionForce
@@ -2286,7 +2286,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.01
+      m_SerializableObject: 0.1
     m_Space: -1
   m_Property:
     name: stickDistance
@@ -2320,7 +2320,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.1
+      m_SerializableObject: 0.001
     m_Space: -1
   m_Property:
     name: stickForce

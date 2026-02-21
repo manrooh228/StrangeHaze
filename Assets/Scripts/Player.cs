@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 using UnityEngine.VFX;
 
 public class Player : MonoBehaviour
@@ -15,13 +17,18 @@ public class Player : MonoBehaviour
 
     [Header("Physics")]
     [SerializeField] private float moveSpeed;
-    [SerializeField] private int health = 5;
+    [SerializeField] private int health;
+    [SerializeField] private int maxHealth = 10;
 
     [Header("SFX Settings")]
     public AudioSource audioSource;
     public AudioClip[] stepSounds;
     public float stepInterval = 0.5f;
     [Range(0.1f, 0.5f)] public float pitchRange = 0.2f;
+
+    [Header("Post Processing")]
+    public Volume volume;
+    private Vignette vignette;
 
     private float stepTimer;
 
@@ -39,6 +46,16 @@ public class Player : MonoBehaviour
         UpdateCursor();
     }
 
+    private void Start()
+    {
+        health = maxHealth;
+
+        if (volume.profile.TryGet<Vignette>(out var tmpVignette))
+        {
+            vignette = tmpVignette;
+            vignette.intensity.value = 0.5f;
+        }
+    }
     private void haveWeaponCheck()
     {
         if (haveWeapon)
@@ -149,6 +166,23 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        float healthPercent = (float)health / (float)maxHealth;
+
+        if (vignette != null)
+        {
+            // Цвет плавно переходит от черного к красному
+            // Когда healthPercent = 1 (полное ХП), цвет будет black
+            // Когда healthPercent = 0 (нет ХП), цвет будет red
+            Color safeColor = Color.black;
+            Color dangerColor = Color.red;
+
+            vignette.color.value = Color.Lerp(dangerColor, safeColor, healthPercent);
+
+            // Дополнительно: можно чуть-чуть увеличивать интенсивность 
+            // от 0.2 (здоровье) до 0.5 (при смерти)
+            vignette.intensity.value = Mathf.Lerp(0.7f, 0.5f, healthPercent);
+        }
+
         if (health <= 0) Die();
     }
 
