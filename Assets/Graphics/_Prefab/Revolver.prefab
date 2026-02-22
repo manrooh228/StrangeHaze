@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5745066026874570652}
   - component: {fileID: -1262144180897984873}
   - component: {fileID: 2359359502780007645}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Revolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,6 @@ MonoBehaviour:
   _bullet: {fileID: 6637848278189866674, guid: d2d5dee9cbd6cc6448496548ed801fd0, type: 3}
   _spawnPoint: {fileID: 6037937780323960681}
   player: {fileID: 0}
-  _deadzoneRadius: 4
   _damage: 1
 --- !u!95 &2359359502780007645
 Animator:
@@ -139,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6037937780323960681}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
