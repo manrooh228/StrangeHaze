@@ -11,6 +11,11 @@ public class Weapon : MonoBehaviour
     private Transform _playerTransform;
     [SerializeField] private int _damage;
 
+    [Header("SFX Settings")]
+    public AudioSource audioSource;
+    public AudioClip revolverShot;
+    public AudioClip revolverShotFail;
+
     public int Damage { get => _damage; set => _damage = value; }
 
 
@@ -43,10 +48,11 @@ public class Weapon : MonoBehaviour
             if (_revolverController.RequestShot())
             {
                 Instantiate(_bullet, _spawnPoint.position, _spawnPoint.rotation);
+                audioSource.PlayOneShot(revolverShot);
             }
             else
             {
-                Debug.Log("Осечка: пустой слот или гильза!");
+                audioSource.PlayOneShot(revolverShotFail);
             }
         }
     }

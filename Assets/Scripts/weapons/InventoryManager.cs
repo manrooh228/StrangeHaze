@@ -13,7 +13,7 @@ namespace Assets.Scripts.weapons
         public Transform bagContainer;
 
         [Header("Ammo Data")]
-        public int currentAmmoInBag; // Сколько пуль просто лежит в сумке
+        public int currentAmmoInBag = 0; // Сколько пуль просто лежит в сумке
 
         [Header("References")]
         [SerializeField] private Player player; // Ссылка на твой скрипт игрока
@@ -26,9 +26,11 @@ namespace Assets.Scripts.weapons
 
         public void AddAmmo(int amount)
         {
-            currentAmmoInBag += amount;
-            Debug.Log($"Подобрано патронов: {amount}. Всего в сумке: {currentAmmoInBag}");
-            // Тут позже добавим спавн визуальных патронов в сетку инвентаря
+            if(currentAmmoInBag < 10)
+            {
+                currentAmmoInBag += amount;
+                Debug.Log($"Подобрано патронов: {amount}. Всего в сумке: {currentAmmoInBag}");
+            }
         }
 
 

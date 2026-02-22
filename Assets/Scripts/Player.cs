@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     public float stepInterval = 0.5f;
     [Range(0.1f, 0.5f)] public float pitchRange = 0.2f;
 
+    public AudioClip inventoryOpenSound;
+    public AudioClip inventoryCloseSound;
+
     [Header("Post Processing")]
     public Volume volume;
     private Vignette vignette;
@@ -101,15 +104,19 @@ public class Player : MonoBehaviour
             {
                 Time.timeScale = 0f;
                 Cursor.visible = true;
+                //audioSource.PlayOneShot(inventoryOpenSound);
                 //Cursor.lockState = CursorLockMode.None;
 
                 Assets.Scripts.weapons.InventoryManager.Instance.RefreshInventoryUI();
+                
             }
             else
             {
                 Time.timeScale = 1f;
+                //audioSource.PlayOneShot(inventoryCloseSound);
                 Cursor.visible = false;
                 //Cursor.lockState = CursorLockMode.Locked;
+                
             }
 
             UpdateCursor();
