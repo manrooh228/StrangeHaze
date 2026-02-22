@@ -5,18 +5,18 @@ namespace Assets.Scripts.weapons
 {
     public class InventoryManager : MonoBehaviour
     {
-
         public static InventoryManager Instance;
 
         [Header("UI Layout")]
         public GameObject bulletUIPrefab;
-        public Transform bagContainer;
+        public Transform bagContainer; // Родительский объект, в котором лежат пустые слоты
 
         [Header("Ammo Data")]
-        public int currentAmmoInBag = 0; // Сколько пуль просто лежит в сумке
+        public int currentAmmoInBag = 0;
+        private int maxAmmo = 10; // Максимальное количество слотов
 
         [Header("References")]
-        [SerializeField] private Player player; // Ссылка на твой скрипт игрока
+        [SerializeField] private Player player;
 
         private void Awake()
         {
@@ -24,15 +24,28 @@ namespace Assets.Scripts.weapons
             else Destroy(gameObject);
         }
 
-        public void AddAmmo(int amount)
+        private void Start()
         {
-            if(currentAmmoInBag < 10)
-            {
-                currentAmmoInBag += amount;
-                Debug.Log($"Подобрано патронов: {amount}. Всего в сумке: {currentAmmoInBag}");
-            }
+            // Обновляем интерфейс при старте игры
+            RefreshInventoryUI();
         }
 
+        public void AddAmmo(int amount)
+        {
+            // Сразу ограничиваем число, чтобы не превысило 10
+            if (currentAmmoInBag < maxAmmo)
+            {
+                currentAmmoInBag += amount;
+
+                // Гарантируем, что не вылезем за пределы 10
+                currentAmmoInBag = Mathf.Clamp(currentAmmoInBag, 0, maxAmmo);
+
+                Debug.Log($"Подобрано патронов. Всего в сумке: {currentAmmoInBag}");
+
+                // ВАЖНО: Обновляем UI сразу после изменения данных!
+                RefreshInventoryUI();
+            }
+        }
 
         public void EquipWeapon()
         {
@@ -41,31 +54,34 @@ namespace Assets.Scripts.weapons
 
         public void RefreshInventoryUI()
         {
-            // 1. Сначала очищаем ПАТРОНЫ внутри слотов, не трогая сами слоты
-            foreach (Transform slot in bagContainer)
+            // Проходимся по всем слотам в сумке
+            for (int i = 0; i < bagContainer.childCount; i++)
             {
-                // Удаляем все дочерние объекты (пульки) внутри текущего слота
-                foreach (Transform bullet in slot)
+                Transform slot = bagContainer.GetChild(i);
+
+                // Логика: i - это номер текущего слота (0, 1, 2...)
+                // Если номер слота меньше кол-ва патронов, в нем должна быть пуля.
+                if (i < currentAmmoInBag)
                 {
-                    Destroy(bullet.gameObject);
+                    // Если слот пустой — добавляем пулю
+                    if (slot.childCount == 0)
+                    {
+                        GameObject newBullet = Instantiate(bulletUIPrefab, slot);
+
+                        // Центруем пулю внутри слота
+                        RectTransform rect = newBullet.GetComponent<RectTransform>();
+                        if (rect != null) rect.anchoredPosition = Vector2.zero;
+                    }
                 }
-            }
-
-            // 2. Раскладываем текущее количество патронов по слотам
-            // Используем Mathf.Min, чтобы не попытаться положить больше пуль, чем у нас есть физических слотов
-            int slotsAvailable = bagContainer.childCount;
-            int ammoToDisplay = Mathf.Min(currentAmmoInBag, slotsAvailable);
-
-            for (int i = 0; i < ammoToDisplay; i++)
-            {
-                // Берем i-ый слот по счету
-                Transform targetSlot = bagContainer.GetChild(i);
-
-                // Спавним префаб пули как дочерний объект этого слота
-                GameObject newBullet = Instantiate(bulletUIPrefab, targetSlot);
-
-                // Сбрасываем позицию в 0, чтобы пуля встала ровно в центр слота
-                newBullet.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                else
+                {
+                    // Если патронов меньше, чем этот слот (например, патронов 3, а это 4-й слот)
+                    // Удаляем всё, что есть в этом слоте
+                    foreach (Transform child in slot)
+                    {
+                        Destroy(child.gameObject);
+                    }
+                }
             }
         }
     }

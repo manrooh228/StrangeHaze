@@ -7,7 +7,7 @@ public class ItemPickup : MonoBehaviour
     public ItemType type;
 
     public string itemName = "Предмет";
-    public int amount = 6;
+    public int amount = 1;
     public GameObject promptUI;
 
     private bool _canPickup;
