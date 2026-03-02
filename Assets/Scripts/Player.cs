@@ -102,9 +102,8 @@ public class Player : MonoBehaviour
 
             if (isActive)
             {
-                Time.timeScale = 0f;
                 Cursor.visible = true;
-                //audioSource.PlayOneShot(inventoryOpenSound);
+                audioSource.PlayOneShot(inventoryOpenSound);
                 //Cursor.lockState = CursorLockMode.None;
 
                 Assets.Scripts.weapons.InventoryManager.Instance.RefreshInventoryUI();
@@ -112,8 +111,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 1f;
-                //audioSource.PlayOneShot(inventoryCloseSound);
+                audioSource.PlayOneShot(inventoryCloseSound);
                 Cursor.visible = false;
                 //Cursor.lockState = CursorLockMode.Locked;
                 
