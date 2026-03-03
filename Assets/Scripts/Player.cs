@@ -2,13 +2,14 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.VFX;
+using Assets.Scripts.Service;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private Animator anim;
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    public VisualEffect vfxRenderer;
+    [SerializeField] private VisualEffect vfxRenderer;
     public GameObject inventoryCanvas;
 
     [Header("Cursor Settings")]
@@ -16,21 +17,22 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector2 _hotspot = new Vector2(12.5f, 12.5f); //25*25
 
     [Header("Physics")]
+    [SerializeField] private InputHandler _inputHandler;
     [SerializeField] private float moveSpeed;
     [SerializeField] private int health;
     [SerializeField] private int maxHealth = 10;
 
     [Header("SFX Settings")]
-    public AudioSource audioSource;
-    public AudioClip[] stepSounds;
-    public float stepInterval = 0.5f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] stepSounds;
+    [SerializeField] private float stepInterval = 0.5f;
     [Range(0.1f, 0.5f)] public float pitchRange = 0.2f;
 
-    public AudioClip inventoryOpenSound;
-    public AudioClip inventoryCloseSound;
+    [SerializeField] private AudioClip inventoryOpenSound;
+    [SerializeField] private AudioClip inventoryCloseSound;
 
     [Header("Post Processing")]
-    public Volume volume;
+    [SerializeField] private Volume volume;
     private Vignette vignette;
 
     private float stepTimer;
@@ -42,12 +44,15 @@ public class Player : MonoBehaviour
 
     public int Health { get => health; set => health = value; }
 
+
     private void Awake()
     {
+        _inputHandler = GetComponent<InputHandler>();
         rb = GetComponent<Rigidbody2D>();
         haveWeaponCheck();
         UpdateCursor();
     }
+
 
     private void Start()
     {
@@ -133,7 +138,10 @@ public class Player : MonoBehaviour
         anim.SetBool("isMoving", isMoving);
     }
 
-    private void HandleInput() => moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    private void HandleInput()
+    {
+        moveInput = new Vector2(_inputHandler.GetHorizontal(), _inputHandler.GetVertical());
+    }
 
     private void HandleMovement()
     {
