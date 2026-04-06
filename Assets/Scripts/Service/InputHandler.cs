@@ -14,7 +14,7 @@ namespace Assets.Scripts.Service
 
         public void Start()
         {
-            _inputSource = new DesktopInput();
+            _inputSource = new DesktopInput();//here we set device
         }
 
         public float GetHorizontal() => _inputSource.Horizontal;
