@@ -1034,10 +1034,6 @@ PrefabInstance:
       propertyPath: speed
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
-      propertyPath: viewRadius
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
       value: Enemy (5)
@@ -1312,7 +1308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 25
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
@@ -1484,7 +1480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 25
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
@@ -1927,7 +1923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 25
+      value: 15.3
       objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
@@ -2572,7 +2568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
@@ -4268,7 +4264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 25
+      value: 15.3
       objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
@@ -5332,7 +5328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 25
+      value: 15.3
       objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
@@ -31478,10 +31474,6 @@ PrefabInstance:
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: speed
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
-      propertyPath: viewRadius
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
@@ -58645,10 +58637,6 @@ PrefabInstance:
       propertyPath: speed
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
-      propertyPath: viewRadius
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
       value: Enemy (3)
@@ -60082,7 +60070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2258871441016962292, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: m_Name
