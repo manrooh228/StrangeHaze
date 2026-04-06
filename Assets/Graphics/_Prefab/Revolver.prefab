@@ -100,7 +100,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7760216317690810710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e12d7a5739a0240abdb3b9adc110e5, type: 3}
+  m_Script: {fileID: 11500000, guid: ee953dba4d799604385f4cd2eeaa2299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _revolverController: {fileID: 0}

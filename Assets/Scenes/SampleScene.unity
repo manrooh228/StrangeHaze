@@ -3250,6 +3250,7 @@ GameObject:
   - component: {fileID: 903566960}
   - component: {fileID: 903566961}
   - component: {fileID: 903566962}
+  - component: {fileID: 903566963}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -3308,7 +3309,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 903566955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad183b867fb18be4eb61736e30ae1bfe, type: 3}
+  m_Script: {fileID: 11500000, guid: a782bc0220aad2848b0edd74124c1739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
@@ -3316,20 +3317,20 @@ MonoBehaviour:
   inventoryCanvas: {fileID: 109346369}
   _crosshairTexture: {fileID: 2800000, guid: 7a014d457a77f8648b8166a77f1c446b, type: 3}
   _hotspot: {x: 12.5, y: 12.5}
-  moveSpeed: 4
+  _inputHandler: {fileID: 903566963}
+  moveSpeed: 5
   health: 10
   maxHealth: 10
   audioSource: {fileID: 903566962}
-  stepSounds:
-  - {fileID: 8300000, guid: 521513d8e2962a74c94cf64e5bcd2b8b, type: 3}
+  stepSounds: []
   stepInterval: 0.5
   pitchRange: 0.2
   inventoryOpenSound: {fileID: 8300000, guid: b5a68ee6f1cee764c88a2018c67c6bbe, type: 3}
   inventoryCloseSound: {fileID: 8300000, guid: 18fb58ee90821224c921f4a9c95d5041, type: 3}
   volume: {fileID: 518233744}
-  haveWeapon: 0
-  weapon: {fileID: 7760216317690810710, guid: 3b52e5516d562f748a76f36f3466cf47, type: 3}
-  idle: {fileID: 3456377961378126096, guid: cd38dfc69332c6940b5fd2a98e44b874, type: 3}
+  haveWeapon: 1
+  weapon: {fileID: -2253911629886400664, guid: c0e58cabfaa95e94e96bf0142b3df95a, type: 3}
+  idle: {fileID: 7760216317690810710, guid: 3b52e5516d562f748a76f36f3466cf47, type: 3}
 --- !u!70 &903566959
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3499,6 +3500,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &903566963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903566955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1ef667c430e57409dcd4294c89135b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &960544850
 PrefabInstance:
   m_ObjectHideFlags: 0
