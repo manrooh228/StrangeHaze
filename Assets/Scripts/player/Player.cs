@@ -107,7 +107,6 @@ public class Player : MonoBehaviour
 
             if (isActive)
             {
-                Time.timeScale = 0f;
                 Cursor.visible = true;
                 //audioSource.PlayOneShot(inventoryOpenSound);
                 //Cursor.lockState = CursorLockMode.None;

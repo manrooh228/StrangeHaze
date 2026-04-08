@@ -381,7 +381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 15
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: _avoidanceRadius
@@ -1106,6 +1106,10 @@ PrefabInstance:
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: speed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
+      propertyPath: viewRadius
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: _avoidanceRadius
@@ -2008,7 +2012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 15.3
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: _avoidanceRadius
@@ -2657,7 +2661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 15
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: _avoidanceRadius
@@ -4370,7 +4374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 15.3
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: _avoidanceRadius
@@ -5438,7 +5442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 15.3
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: _avoidanceRadius
@@ -58697,6 +58701,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
+      propertyPath: viewRadius
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: _avoidanceRadius
       value: 1.4
       objectReference: {fileID: 0}
@@ -60133,7 +60141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: viewRadius
-      value: 15
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 58989141120249405, guid: 3ea4e28005215414a92222ada97da051, type: 3}
       propertyPath: _avoidanceRadius

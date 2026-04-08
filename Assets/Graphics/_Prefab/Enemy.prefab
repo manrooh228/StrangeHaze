@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   health: 2
-  onoffGismos: 1
   viewRadius: 12
   viewAngle: 120
   playerMask:
@@ -59,10 +58,15 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  _canSeePlayer: 0
+  _fovCheckInterval: 0.1
+  _searchDuration: 2.5
   _attackRange: 1.8
   _attackDamage: 1
   _attackCooldown: 1
+  _steeringRayCount: 12
+  _avoidanceRadius: 2
+  _steeringSmoothing: 0.15
+  _showGizmos: 1
 --- !u!50 &5816101232829947250
 Rigidbody2D:
   serializedVersion: 5
@@ -300,7 +304,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -7482177786666212508, guid: fc05eced22bfa794288a97df034acf6a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
