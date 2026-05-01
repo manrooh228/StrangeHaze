@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     public LayerMask obstacleMask;
 
     // Кулдаун рейкаста (оптимизация — не каждый кадр)
-    [SerializeField] private float _fovCheckInterval = 0.1f;
+    [SerializeField] private float _fovCheckInterval = 0.5f;
     private float _nextFovCheckTime;
 
     private bool _canSeePlayer;

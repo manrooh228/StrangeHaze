@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator anim;
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    [SerializeField] private VisualEffect vfxRenderer;
+    //[SerializeField] private VisualEffect vfxRenderer;
     public GameObject inventoryCanvas;
 
     [Header("Cursor Settings")]
@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
     {
         rb.linearVelocity = moveInput.normalized * moveSpeed;
 
-        vfxRenderer.SetVector3("ColliderPos", transform.position);
+        //vfxRenderer.SetVector3("ColliderPos", transform.position);
 
         // Логика звуков шагов
         if (moveInput.sqrMagnitude > 0.1f)
