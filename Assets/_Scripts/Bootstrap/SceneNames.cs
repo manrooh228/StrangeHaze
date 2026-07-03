@@ -23,6 +23,7 @@ namespace StrangeHaze.Bootstrap
 
         // ── Особые сцены ──────────────────────────────────────────────────────
         public const string Shop       = "Shop";
+        public const string House      = "house"; // сцена дома — отдых, восстановление стамины
 
         // Добавляй новые сцены сюда:
         // public const string Cutscene = "Cutscene";
