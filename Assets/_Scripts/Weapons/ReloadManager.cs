@@ -3,17 +3,17 @@ using UnityEngine;
 
 namespace Assets.Scripts.weapons
 {
-    public class InventoryManager : MonoBehaviour
+    public class ReloadManager : MonoBehaviour
     {
-        public static InventoryManager Instance;
+        public static ReloadManager Instance;
 
         [Header("UI Layout")]
         public GameObject bulletUIPrefab;
-        public Transform bagContainer; // Родительский объект, в котором лежат пустые слоты
+        public Transform bagContainer;
 
         [Header("Ammo Data")]
         public int currentAmmoInBag = 0;
-        private int maxAmmo = 10; // Максимальное количество слотов
+        private int maxAmmo = 10;
 
         [Header("References")]
         [SerializeField] private Player player;
