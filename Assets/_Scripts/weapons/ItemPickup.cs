@@ -1,12 +1,14 @@
 using Assets.Scripts.weapons;
+using Assets.Scripts.Needs;
+using StrangeHaze.Bootstrap;
 using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    public enum ItemType { Ammo, Weapon }
+    public enum ItemType { Ammo, Weapon, Food }
     public ItemType type;
 
-    public string itemName = "Предмет";
+    public string itemName = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
     public int amount = 1;
     public GameObject promptUI;
 
@@ -21,12 +23,16 @@ public class ItemPickup : MonoBehaviour
         {
             if (type == ItemType.Ammo)
             {
-                InventoryManager.Instance.AddAmmo(amount);
+                ReloadManager.Instance.AddAmmo(amount);
             }
             else if (type == ItemType.Weapon)
             {
-                InventoryManager.Instance.EquipWeapon();
+                ReloadManager.Instance.EquipWeapon();
                 Destroy(FindAnyObjectByType<idle>());
+            }
+            else if (type == ItemType.Food)
+            {
+                ServiceLocator.Get<IPlayerNeedsService>().Eat(amount);
             }
 
             Destroy(gameObject);
