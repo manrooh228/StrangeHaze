@@ -3,6 +3,8 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.VFX;
 using Assets.Scripts.Service;
+using Assets.Scripts.Needs;
+using StrangeHaze.Bootstrap;
 
 public class Player : MonoBehaviour
 {
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject idle;
 
     public int Health { get => health; set => health = value; }
+    public int MaxHealth => maxHealth;
 
 
     private void Awake()
@@ -111,7 +114,7 @@ public class Player : MonoBehaviour
                 //audioSource.PlayOneShot(inventoryOpenSound);
                 //Cursor.lockState = CursorLockMode.None;
 
-                Assets.Scripts.weapons.InventoryManager.Instance.RefreshInventoryUI();
+                Assets.Scripts.weapons.ReloadManager.Instance.RefreshInventoryUI();
                 
             }
             else
@@ -146,11 +149,12 @@ public class Player : MonoBehaviour
 
     private void HandleMovement()
     {
-        rb.linearVelocity = moveInput.normalized * moveSpeed;
+        float speedMultiplier = ServiceLocator.Get<IPlayerNeedsService>().GetSpeedMultiplier();
+        rb.linearVelocity = moveInput.normalized * moveSpeed * speedMultiplier;
 
         //vfxRenderer.SetVector3("ColliderPos", transform.position);
 
-        // Логика звуков шагов
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         if (moveInput.sqrMagnitude > 0.1f)
         {
             stepTimer -= Time.deltaTime;
@@ -162,7 +166,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            stepTimer = 0; // Сбрасываем таймер при остановке
+            stepTimer = 0; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
     }
 
@@ -184,16 +188,16 @@ public class Player : MonoBehaviour
 
         if (vignette != null)
         {
-            // Цвет плавно переходит от черного к красному
-            // Когда healthPercent = 1 (полное ХП), цвет будет black
-            // Когда healthPercent = 0 (нет ХП), цвет будет red
+            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            // пїЅпїЅпїЅпїЅпїЅ healthPercent = 1 (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ), пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ black
+            // пїЅпїЅпїЅпїЅпїЅ healthPercent = 0 (пїЅпїЅпїЅ пїЅпїЅ), пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ red
             Color safeColor = Color.black;
             Color dangerColor = Color.red;
 
             vignette.color.value = Color.Lerp(dangerColor, safeColor, healthPercent);
 
-            // Дополнительно: можно чуть-чуть увеличивать интенсивность 
-            // от 0.2 (здоровье) до 0.5 (при смерти)
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+            // пїЅпїЅ 0.2 (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ) пїЅпїЅ 0.5 (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
             vignette.intensity.value = Mathf.Lerp(0.7f, 0.5f, healthPercent);
         }
 
