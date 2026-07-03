@@ -1,3 +1,4 @@
+using Assets.Scripts.Needs;
 using UnityEngine;
 
 namespace StrangeHaze.Bootstrap
@@ -41,6 +42,9 @@ namespace StrangeHaze.Bootstrap
 
             // Загрузка сцен — используется внутри GameSceneManager и LoadingEntryPoint
             ServiceLocator.Register<ISceneLoader>(new SceneLoader());
+
+            // Голод/сон/стамина игрока — переживает переходы между сценами (Level1 ↔ house).
+            ServiceLocator.Register<IPlayerNeedsService>(new PlayerNeedsService());
 
             // Добавляй новые глобальные сервисы здесь:
             // ServiceLocator.Register<IAudioService>(new AudioService());
