@@ -8,15 +8,15 @@ public class RevolverSlot : MonoBehaviour, IDropHandler, IPointerClickHandler
     public enum SlotState { Empty, Loaded, Spent }
     public SlotState currentState = SlotState.Empty;
 
-    public Sprite emptySprite;  // Дырка
-    public Sprite fullSprite;   // Целый патрон
-    public Sprite spentSprite;  // Стреляная гильза
+    public Sprite emptySprite;  // пїЅпїЅпїЅпїЅпїЅ
+    public Sprite fullSprite;   // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public Sprite spentSprite;  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
     private Image _img;
 
     void Awake() => _img = GetComponent<Image>();
 
-    // Срабатывает, когда мы отпускаем пулю НАД этим слотом
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void OnDrop(PointerEventData eventData)
     {
         if (currentState == SlotState.Empty && eventData.pointerDrag != null)
@@ -25,14 +25,14 @@ public class RevolverSlot : MonoBehaviour, IDropHandler, IPointerClickHandler
             if (bullet != null)
             {
                 LoadBullet();
-                Destroy(eventData.pointerDrag); // Удаляем пулю из "руки" (инвентаря)
+                Destroy(eventData.pointerDrag); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ "пїЅпїЅпїЅпїЅ" (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
             }
         }
     }
 
     public void LoadBullet()
     {
-        InventoryManager.Instance.currentAmmoInBag--;
+        ReloadManager.Instance.currentAmmoInBag--;
         currentState = SlotState.Loaded;
         _img.sprite = fullSprite;
     }
@@ -46,14 +46,14 @@ public class RevolverSlot : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
     }
 
-    // Клик мышкой для извлечения гильзы
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void OnPointerClick(PointerEventData eventData)
     {
         if (currentState == SlotState.Spent)
         {
             currentState = SlotState.Empty;
             _img.sprite = emptySprite;
-            Debug.Log("Гильза выброшена!");
+            Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
         }
     }
 }
