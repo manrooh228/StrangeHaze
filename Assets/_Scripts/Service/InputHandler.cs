@@ -20,6 +20,9 @@ namespace Assets.Scripts.Service
         public float GetHorizontal() => _inputSource.Horizontal;
         public float GetVertical() => _inputSource.Vertical;
         public bool GetShootPressed() => _inputSource.ShootPressed;
+        public bool GetReloadPressed() => _inputSource.ReloadPressed;
+        public bool GetInventoryPressed() => _inputSource.InventoryPressed;
+        public bool GetWeaponSwitchPressed() => _inputSource.WeaponSwitchPressed;
 
         public void ChangeBinding(string action, KeyCode key)
         {
