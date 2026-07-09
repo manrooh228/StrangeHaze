@@ -40,9 +40,13 @@ public class Player : MonoBehaviour
     private float stepTimer;
 
     [Header("Weapon")]
-    [SerializeField] private bool haveWeapon = true;
+    [SerializeField] private bool haveWeapon = false;
+    [SerializeField] private bool weaponDrawn = true; // сейчас в руке: револьвер (true) или кулаки (false)
     [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject idle;
+
+    private GameObject _weaponInstance;
+    private GameObject _idleInstance;
 
     public int Health { get => health; set => health = value; }
     public int MaxHealth => maxHealth;
@@ -52,7 +56,12 @@ public class Player : MonoBehaviour
     {
         _inputHandler = GetComponent<InputHandler>();
         rb = GetComponent<Rigidbody2D>();
-        haveWeaponCheck();
+
+        SpawnIdle();
+        if (haveWeapon) SpawnWeapon();
+        weaponDrawn = haveWeapon;
+        UpdateEquippedVisuals();
+
         UpdateCursor();
     }
 
@@ -67,21 +76,39 @@ public class Player : MonoBehaviour
             vignette.intensity.value = 0.5f;
         }
     }
-    private void haveWeaponCheck()
+
+    private void SpawnIdle()
     {
-        if (haveWeapon)
+        if (_idleInstance == null) _idleInstance = Instantiate(idle, gameObject.transform);
+    }
+
+    private void SpawnWeapon()
+    {
+        if (_weaponInstance == null) _weaponInstance = Instantiate(weapon, gameObject.transform);
+    }
+
+    private void UpdateEquippedVisuals()
+    {
+        if (_idleInstance) _idleInstance.SetActive(!weaponDrawn);
+        if (_weaponInstance) _weaponInstance.SetActive(weaponDrawn);
+    }
+
+    private void HandleWeaponSwitch()
+    {
+        if (!haveWeapon) return; // нечего доставать, револьвер ещё не подобран
+        if (inventoryCanvas.activeSelf) return;
+
+        if (_inputHandler.GetWeaponSwitchPressed())
         {
-            Instantiate(weapon, gameObject.transform);
-        }
-        else
-        {
-            Instantiate(idle, gameObject.transform);
+            weaponDrawn = !weaponDrawn;
+            UpdateEquippedVisuals();
+            UpdateCursor();
         }
     }
 
     private void Update()
     {
-        if (!haveWeapon)
+        if (!weaponDrawn)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 directionToMouse = mousePos - transform.position;
@@ -97,13 +124,14 @@ public class Player : MonoBehaviour
         HandleInput();
         HandleAnimations();
         HandleMovement();
-        toggleInventory();
+        toggleReload();
+        HandleWeaponSwitch();
     }
 
 
-    private void toggleInventory()
+    private void toggleReload()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (_inputHandler.GetReloadPressed())
         {
             bool isActive = !inventoryCanvas.activeSelf;
             inventoryCanvas.SetActive(isActive);
@@ -211,9 +239,10 @@ public class Player : MonoBehaviour
 
     public void UnlockWeapon ()
     {
-        Destroy(GetComponentInChildren<Animator>().gameObject);
         haveWeapon = true;
-        haveWeaponCheck();
+        SpawnWeapon();
+        weaponDrawn = true;
+        UpdateEquippedVisuals();
         UpdateCursor();
     }
 
@@ -225,7 +254,7 @@ public class Player : MonoBehaviour
             Cursor.visible = true;
         }
 
-        else if (haveWeapon)
+        else if (weaponDrawn)
         {
             Cursor.SetCursor(_crosshairTexture, _hotspot, CursorMode.Auto);
             Cursor.visible = true;

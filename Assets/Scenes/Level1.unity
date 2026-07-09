@@ -89110,6 +89110,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 518233744}
     - target: {fileID: 3267740135421811802, guid: 5036ab4add278f947b9216f7e454a068, type: 3}
+      propertyPath: haveWeapon
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267740135421811802, guid: 5036ab4add278f947b9216f7e454a068, type: 3}
       propertyPath: vfxRenderer
       value: 
       objectReference: {fileID: 0}

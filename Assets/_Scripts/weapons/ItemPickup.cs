@@ -28,7 +28,6 @@ public class ItemPickup : MonoBehaviour
             else if (type == ItemType.Weapon)
             {
                 ReloadManager.Instance.EquipWeapon();
-                Destroy(FindAnyObjectByType<idle>());
             }
             else if (type == ItemType.Food)
             {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using Assets.Scripts.Service;
 
 public class Weapon : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Player player;
     private Transform _playerTransform;
+    private InputHandler _inputHandler;
     [SerializeField] private int _damage;
 
     [Header("SFX Settings")]
@@ -27,6 +29,7 @@ public class Weapon : MonoBehaviour
         {
             _playerTransform = player.transform;
         }
+        _inputHandler = GetComponentInParent<InputHandler>();
     }
 
     private void Update()
@@ -41,9 +44,9 @@ public class Weapon : MonoBehaviour
 
     private void FireInput()
     {
-        if (GetComponentInParent<Player>().inventoryCanvas.activeSelf) return;
+        if (player.inventoryCanvas.activeSelf) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (_inputHandler.GetShootPressed())
         {
             if (_revolverController.RequestShot())
             {
